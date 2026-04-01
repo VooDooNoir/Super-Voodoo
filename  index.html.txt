@@ -1,0 +1,1 @@
+echo "<h1>Hello World - New Project Live!</h1>" > index.html
