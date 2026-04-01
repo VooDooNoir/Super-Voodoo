@@ -8,7 +8,7 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   url: 'https://superhostagent.com',
-  baseUrl: '/app/Sorcer/KL/',
+  baseUrl: '/app/Sorcer/KLSorcer/KL/',
 
   organizationName: 'NousResearch',
   projectName: 'hermes-agent',
