@@ -7,8 +7,8 @@ const config: Config = {
   tagline: 'The self-improving AI agent',
   favicon: 'img/favicon.ico',
 
-  url: 'https://hermes-agent.nousresearch.com',
-  baseUrl: '/docs/',
+  url: 'https://superhostagent.com',
+  baseUrl: '/app/Sorcer/KL/',
 
   organizationName: 'NousResearch',
   projectName: 'hermes-agent',
