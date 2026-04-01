@@ -1,0 +1,29 @@
+name: "Super Voodoo"
+type: "standalone"
+persistent_memory: true
+voice_transcription: "whisper-1"
+
+providers:
+  default: "openrouter"
+  openrouter:
+    smart_routing: true 
+  fallback: ["google", "anthropic"]
+
+skills:
+  - ui-frontend-design      
+  - tailwind-design-system  
+  - tailwind-utilities      
+  - assets-icons-fonts      
+  - micro-saas-launcher     
+  - ci-cd-deployment
+  - 20i-manager        
+
+sub_agents:
+  - name: "Major Tom"
+    path: "/Volumes/Host3030/Major Tom/"
+  - name: "Claudio"
+    role: "Revenue Intelligence Advisor"
+    path: "/Volumes/Host3030/Major Tom/Claudio/"
+  - name: "Agent Supreme"
+    role: "Viral Marketing Master"
+    path: "/Volumes/Host3030/Major Tom/marketing-supreme/"
