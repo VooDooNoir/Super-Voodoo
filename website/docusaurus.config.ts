@@ -7,8 +7,8 @@ const config: Config = {
   tagline: 'The self-improving AI agent',
   favicon: 'img/favicon.ico',
 
-  url: 'https://superhostagent.com',
-  baseUrl: '/app/Sorcer/KLSorcer/KL/',
+  url: 'https://website-iota-bice-92.vercel.app/',
+  baseUrl: '/',
 
   organizationName: 'NousResearch',
   projectName: 'hermes-agent',
