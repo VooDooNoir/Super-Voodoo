@@ -74,6 +74,7 @@ class SmsAdapter(BasePlatformAdapter):
         self._account_sid: str = os.environ["TWILIO_ACCOUNT_SID"]
         self._auth_token: str = os.environ["TWILIO_AUTH_TOKEN"]
         self._from_number: str = os.getenv("TWILIO_PHONE_NUMBER", "")
+        self._messaging_service_sid: str = os.getenv("TWILIO_MESSAGING_SERVICE_SID", "")
         self._webhook_port: int = int(
             os.getenv("SMS_WEBHOOK_PORT", str(DEFAULT_WEBHOOK_PORT))
         )
@@ -94,8 +95,10 @@ class SmsAdapter(BasePlatformAdapter):
         import aiohttp
         from aiohttp import web
 
-        if not self._from_number:
-            logger.error("[sms] TWILIO_PHONE_NUMBER not set — cannot send replies")
+        if not self._from_number and not self._messaging_service_sid:
+            logger.error(
+                "[sms] Neither TWILIO_PHONE_NUMBER nor TWILIO_MESSAGING_SERVICE_SID set"
+            )
             return False
 
         app = web.Application()
@@ -152,7 +155,10 @@ class SmsAdapter(BasePlatformAdapter):
         try:
             for chunk in chunks:
                 form_data = aiohttp.FormData()
-                form_data.add_field("From", self._from_number)
+                if self._messaging_service_sid:
+                    form_data.add_field("MessagingServiceSid", self._messaging_service_sid)
+                else:
+                    form_data.add_field("From", self._from_number)
                 form_data.add_field("To", chat_id)
                 form_data.add_field("Body", chunk)
 
