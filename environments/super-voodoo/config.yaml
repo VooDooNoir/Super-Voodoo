@@ -4,8 +4,8 @@ persistent_memory: true
 voice_transcription: "whisper-1"
 
 providers:
-  default: "openrouter"
-  openrouter:
+  default: "qwen/qwen3-next-80b-a3b-instruct:free"
+  openrouter: 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
     smart_routing: true 
   fallback: ["google", "anthropic"]
 
