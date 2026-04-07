@@ -11,7 +11,7 @@ class VoodooScraper:
     def scrape_website(self, url):
         print(f"Scraping {url}...")
         try:
-            response = requests.get(url, headers=self.headers, timeout=10)
+            response = requests.get(url, headers=self.headers, timeout=10, verify=False)
             response.raise_for_status()
             soup = BeautifulSoup(response.text, 'html.parser')
             
