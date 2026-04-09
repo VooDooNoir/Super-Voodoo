@@ -2582,7 +2582,7 @@ Gradient accumulation and batch sizes <mark style="color:green;">**are now fully
 
 Prior to our fixes, combinations of `batch_size` and `gradient_accumulation_steps` that yielded the same **Effective Batch Size** (i.e., `batch_size × gradient_accumulation_steps = 16`) did not result in equivalent training behavior. For example, configurations like `b1/g16`, `b2/g8`, `b4/g4`, `b8/g2`, and `b16/g1` all have an **Effective Batch Size** of 16, but as shown in the graph, the loss curves did not align when using standard gradient accumulation:
 
-<figure><img src="https://3215535692-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FxhOjnexMCB3dmuQFQ2Zq%2Fuploads%2FfbTkE4kv2tVwCIdyxWKe%2FBefore_-_Standard_gradient_accumulation_UQOFkUggudXuV9dzrh8MA.svg?alt=media&#x26;token=c3297fd4-a96b-45d0-9925-0010165d85c6" alt=""><figcaption><p>(Before - Standard Gradient Accumulation)</p></figcaption></figure>
+<figure><img src="https://3215535692-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FxhOjnexMCB3dmuQFQ2Zq%2Fuploads%2FfbTkE4kv2tVwCIdyxWKe%2FBefo[REDACTED_RESEND_KEY]-_Standard_gradient_accumulation_UQOFkUggudXuV9dzrh8MA.svg?alt=media&#x26;token=c3297fd4-a96b-45d0-9925-0010165d85c6" alt=""><figcaption><p>(Before - Standard Gradient Accumulation)</p></figcaption></figure>
 
 After applying our fixes, the loss curves now align correctly, regardless of how the **Effective Batch Size** of 16 is achieved:
 
@@ -3161,7 +3161,7 @@ And we can now call the model for inference if you want to do call the Ollama se
 
 But to actually run the finetuned model like a ChatGPT, we have to do a bit more! First click the terminal icon![](https://3215535692-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FxhOjnexMCB3dmuQFQ2Zq%2Fuploads%2FUb17xtyDliAKhJEL9KuH%2Fimage.png?alt=media\&token=f612e9b7-7d05-4039-a476-646026c6c8e6) and a Terminal will pop up. It's on the left sidebar.
 
-<figure><img src="https://3215535692-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FxhOjnexMCB3dmuQFQ2Zq%2Fuploads%2FRWPEy4fW8ytOljQYLn55%2FWhere_Terminal.png?alt=media&#x26;token=4ddf3017-2380-4615-958f-a465a76f7bac" alt=""><figcaption></figcaption></figure>
+<figure><img src="https://3215535692-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FxhOjnexMCB3dmuQFQ2Zq%2Fuploads%2FRWPEy4fW8ytOljQYLn55%2FWhe[REDACTED_RESEND_KEY].png?alt=media&#x26;token=4ddf3017-2380-4615-958f-a465a76f7bac" alt=""><figcaption></figcaption></figure>
 
 Then, you might have to press ENTER twice to remove some weird output in the Terminal window. Wait a few seconds and type `ollama run unsloth_model` then hit ENTER.
 
@@ -13941,8 +13941,8 @@ def main():
         bird.draw()
         # Draw score
         font = pygame.font.SysFont(None, 36)
-        score_text = font.render(f'Score: {current_score}', True, (0, 0, 0))
-        screen.blit(score_text, (WIDTH - 150, 10))
+        sco[REDACTED_RESEND_KEY] = font.render(f'Score: {current_score}', True, (0, 0, 0))
+        screen.blit(sco[REDACTED_RESEND_KEY], (WIDTH - 150, 10))
         # Game over screen
         if game_over:
             over_text = font.render('Game Over!', True, (255, 0, 0))

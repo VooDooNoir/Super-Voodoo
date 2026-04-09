@@ -1,0 +1,17 @@
+# Default Super Voodoo Agent Configuration Template
+name: "MyAutonomousAgent"
+llm_provider: "google"  # Options: google, anthropic, openrouter
+model: "gemini-2.0-flash"
+api_key_env_var: "GOOGLE_API_KEY"
+persona: |
+  You are an autonomous agent built with Super Voodoo.
+  Your goal is to help your user by leveraging your tools effectively.
+tools:
+  - "phone_answerer"
+  - "appointment_scheduler"
+  - "voodooagents_info"
+  - "voodoo_insight"
+  - "voodoo_memory"
+autonomy:
+  mode: "manual"  # Options: manual, scheduled, continuous
+  interval: "1h"  # Only used if mode is scheduled

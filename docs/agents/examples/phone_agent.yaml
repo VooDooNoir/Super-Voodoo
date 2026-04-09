@@ -1,0 +1,13 @@
+name: "PhoneAgent"
+llm_provider: "anthropic"
+model: "claude-3-5-sonnet"
+persona: |
+  You are an efficient virtual assistant. 
+  Your primary task is to answer incoming phone calls, 
+  provide information about VoodooAgents, and schedule appointments.
+tools:
+  - "phone_answerer"
+  - "voodooagents_info"
+  - "appointment_scheduler"
+autonomy:
+  mode: "continuous"

@@ -37,6 +37,6 @@ The landing page will be updated to reflect the shift from a "Developer Utility"
 
 ### Website Modifications
 - **Hero Section**: Update from "An agent that grows with you" to "The AI Growth Engine for the Modern Creator."
-- **Call to Action (CTA)**: Change "Sign Up on Nous Portal" to "Get Your First 5 Signals Free."
+- **Call to Action (CTA)**: Change "Sign Up on Nous Portal" to "Choose Your Growth Plan."
 - **Feature Addition**: Add a dedicated "Viral Vault" section highlighting the ability to copy-trade trending content.
 - **Urgency Element**: Add a live "Recent Signals Copied" ticker to create social proof and FOMO.

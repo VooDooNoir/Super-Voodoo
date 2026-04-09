@@ -653,9 +653,9 @@ def main():
     p_wallet.add_argument("address")
     p_wallet.add_argument("--limit", type=int, default=20,
                           help="Max tokens to display (default: 20)")
-    p_wallet.add_argument("--all", action="store_true",
+    p_wallet.add_argument("--all", action="sto[REDACTED_RESEND_KEY]",
                           help="Show all tokens (no limit, no dust filter)")
-    p_wallet.add_argument("--no-prices", action="store_true",
+    p_wallet.add_argument("--no-prices", action="sto[REDACTED_RESEND_KEY]",
                           help="Skip price lookups (faster, RPC-only)")
 
     p_tx = sub.add_parser("tx", help="Transaction details by signature")

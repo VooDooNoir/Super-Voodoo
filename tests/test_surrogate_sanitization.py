@@ -44,14 +44,14 @@ class TestSanitizeSurrogates:
         """Sanitized text must survive json.dumps + utf-8 encoding."""
         dirty = "data \udce2\udcb0 from clipboard"
         clean = _sanitize_surrogates(dirty)
-        serialized = json.dumps({"content": clean}, ensure_ascii=False)
+        serialized = json.dumps({"content": clean}, ensu[REDACTED_RESEND_KEY]=False)
         # Must not raise UnicodeEncodeError
         serialized.encode("utf-8")
 
     def test_original_surrogates_fail_encoding(self):
         """Confirm the original bug: surrogates crash utf-8 encoding."""
         dirty = "data \udce2 from clipboard"
-        serialized = json.dumps({"content": dirty}, ensure_ascii=False)
+        serialized = json.dumps({"content": dirty}, ensu[REDACTED_RESEND_KEY]=False)
         with pytest.raises(UnicodeEncodeError):
             serialized.encode("utf-8")
 

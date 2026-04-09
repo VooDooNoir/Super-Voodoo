@@ -32,7 +32,7 @@ Inferno       100       $149     $1.49        +20 bonus tokens
 Enterprise    Unlimited $499/mo  —            Priority rewrite, all platforms
 
 Add-On Revenue Booster: "Auto-Post Premium"
-- Free tier: Post goes to draft queue (manual review)
+- Standard: Post goes to draft queue (manual review)
 - Premium (+$0.50/token extra): AI auto-posts at optimal engagement time
 - Converts 25-35% of token buyers to this upgrade
 
@@ -97,12 +97,9 @@ Premium tier for the mobile chat interface. Free users get basic Q&A ("schedule 
 ## Pricing Model
 
 Tier                  Price       Features
-Voodoo Direct Free    $0          Basic scheduling, 10 msgs/day, single platform
-Voodoo Direct Pro     $29/mo      Unlimited messages, AI strategist, multi-platform,
-                                  analytics in chat, content suggestions, A/B test captions
-Voodoo Direct Agency  $99/mo      Pro features + manage 5 client accounts,
-                                  white-label replies, client report generation,
-                                  priority AI processing
+Voodoo Creator        $19/mo      All platforms, Analytics
+Voodoo Pro            $49/mo      White-label, Priority support
+Voodoo Agency         $149/mo     Custom branding, API access
 
 Killer Feature for Pro: "Morning Briefing"
 Every morning at 8am, the agent sends a proactive message:
@@ -117,17 +114,16 @@ Every morning at 8am, the agent sends a proactive message:
 Week 1: Tier Gating (Days 1-3)
 
 1. Add subscription_tier column to users table in Neon:
-   - ENUM: free, pro, agency
-   - message_count, last_message_date, daily_message_limit
+   - ENUM: pro, agency
+   - message_count, last_message_date
 
 2. Create Stripe Billing integration:
-   - Subscription products ($29/mo and $99/mo)
+   - Subscription products ($19/mo, $49/mo, and $149/mo)
    - Webhook for subscription events (created, cancelled, updated)
    - Proration handling for upgrades
 
 3. Gating logic in chat endpoint:
-   - Free: if message_count > 10 -> "Upgrade to Pro for unlimited AI strategist access"
-   - Pro/Agency: no limits, route to premium AI prompt
+   - All users must have an active subscription to access the AI strategist.
 
 Week 2: Premium AI Prompts (Days 4-10)
 
@@ -166,19 +162,15 @@ Week 3: Agency Tier and Retention (Days 11-21)
 
 Week 4: Launch and Optimization
 
-9. Soft launch to top 20% most active free users
-10. A/B test the paywall message:
-    - Version A: "Upgrade for $29/mo ->"
-    - Version B: "Your AI social media manager is waiting -> $29/mo"
-11. Implement free trial: 7-day Pro access on signup
+9. Soft launch to top paying users
+10. A/B test the conversion message
+11. Implement limited-time discount: 20% off for the first month
 
 ## Revenue Projection
-- Assume 2,000 free chat users
-- Week 1 trial conversion: 8% -> 160 Pro users
-- Month 1 (post-trial): 65% retention -> 104 paying users
-- Month 1: $3,016/mo recurring ($29 x 104)
-- Month 3: $8,700/mo recurring (300 users via organic growth)
-- Agency tier adds $4,950/mo at 50 agency users
+- Assume 500 initial subscribers
+- Month 1: $24,500 recurring
+- Month 3: $49,000 recurring (via organic growth)
+- Agency tier adds $7,450/mo at 50 agency users
 
 ---
 
@@ -249,9 +241,10 @@ Week 2: Marketplace UI (Days 4-10)
 Week 3: Growth Mechanics (Days 11-21)
 
 6. Seeding strategy (cold start problem):
-   - Manually curate 100 viral signals from public data (first 30 days, free)
+   - Manually curate 100 high-value viral signals from public data
    - Reach out to top 50 Moltbook users: "Earn passive income listing your viral posts"
    - Offer founding creator bonus: "50% rev share for first 3 months" (instead of 30%)
+
 
 7. Social proof engine:
    - After each copy-trade, prompt user: "How did this perform?"
@@ -288,11 +281,11 @@ Week 4: Scale and Optimize
 
 Revenue Stream       Month 1      Month 3      Month 6
 Signal Tokens        $3,675       $12,250      $25,000
-Voodoo Direct Pro    $3,016       $13,650      $28,000
+Voodoo Subscriptions $24,500      $49,000      $98,000
 Viral Vault          $7,800       $19,500      $40,000
-TOTAL                $14,491      $45,400      $93,000/mo
+TOTAL                $35,975      $80,750      $163,000/mo
 
-These are conservative estimates assuming 500-2,000 active users scaling organically.
+These are conservative estimates assuming 500 initial subscribers scaling organically.
 With paid acquisition (even $500/mo Meta ads targeting social media marketers), all numbers can 2-3x.
 
 ---
@@ -305,8 +298,8 @@ With paid acquisition (even $500/mo Meta ads targeting social media marketers), 
    - Can be deployed as a simple gate on the existing endpoint
 3. Add "Hot Signals" banner to frontend showing 5 trending posts with "Copy Trade" CTA
    - This single UI element will be the primary revenue driver for Stream #1
-4. Configure Voodoo Direct free tier limits (10 messages/day)
-   - Set up the paywall message for exceeded limits
+4. Set up Voodoo Direct subscription gate
+   - Implement "Log in to subscribe" or "Choose plan to start chatting" logic
 5. Draft the AI Strategist system prompt for Voodoo Direct Pro
    - This is the product differentiator - spend time here
 

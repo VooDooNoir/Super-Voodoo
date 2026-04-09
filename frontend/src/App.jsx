@@ -1,31 +1,78 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import ProductGallery from './components/ProductGallery';
-import Cart from './components/Cart';
-import Checkout from './components/Checkout';
-import OrderSuccess from './components/OrderSuccess';
-import RoutingPanel from './components/RoutingPanel';
-import ArtStudio from './components/ArtStudio';
-import { CartProvider } from './context/CartContext';
+import React, { useState } from 'react';
+import { ArchitectProvider } from './context/ArchitectContext';
+import ProjectDashboard from './components/ProjectDashboard';
+import BrandInterview from './components/BrandInterview';
+import SiteEditor from './components/SiteEditor';
+import Billing from './pages/Billing';
 
-function App() {
+const App = () => {
+  const [view, setView] = useState('dashboard'); // 'dashboard', 'interview', 'editor', 'billing'
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  const handleSelectProject = (project) => {
+    setSelectedProject(project);
+    setView('editor');
+  };
+
   return (
-    <CartProvider>
-      <Header />
-      <main className="app-main">
-        <Routes>
-          <Route path="/" element={<ProductGallery />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/success" element={<OrderSuccess />} />
-          <Route path="/routing" element={<RoutingPanel />} />
-          <Route path="/cancel" element={<div className="page"><h2>Order Cancelled</h2><a href="/">Return to store</a></div>} />
-          <Route path="/artstudio" element={<ArtStudio />} />
-        </Routes>
-      </main>
-    </CartProvider>
+    <ArchitectProvider>
+      <div className="app-container">
+        <header style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center', 
+          marginBottom: '3rem',
+          paddingBottom: '1rem',
+          borderBottom: '1px solid var(--bg-glass-border)' 
+        }}>
+          <h1 style={{ 
+            fontSize: '2rem', 
+            fontWeight: '700', 
+            color: 'var(--voodoo-purple)',
+            textShadow: '0 0 10px rgba(139, 49, 160, 0.5)'
+          }}>
+            VOODOO ARCHITECT
+          </h1>
+          <div style={{ display: 'flex', gap: '1rem' }}>
+            <button 
+              className="btn-voodoo" 
+              onClick={() => setView('dashboard')}
+            >
+              Dashboard
+            </button>
+            <button 
+              className="btn-voodoo" 
+              onClick={() => setView('billing')}
+            >
+              Billing
+            </button>
+            <button 
+              className="btn-flame" 
+              onClick={() => setView('interview')}
+            >
+              New Project
+            </button>
+          </div>
+        </header>
+
+        {view === 'dashboard' && (
+          <ProjectDashboard onSelectProject={handleSelectProject} />
+        )}
+        
+        {view === 'interview' && (
+          <BrandInterview />
+        )}
+        
+        {view === 'editor' && (
+          <SiteEditor />
+        )}
+
+        {view === 'billing' && (
+          <Billing />
+        )}
+      </div>
+    </ArchitectProvider>
   );
-}
+};
 
 export default App;

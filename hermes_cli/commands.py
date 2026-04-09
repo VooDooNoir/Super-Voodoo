@@ -103,6 +103,10 @@ COMMAND_REGISTRY: list[CommandDef] = [
     CommandDef("voice", "Toggle voice mode", "Configuration",
                args_hint="[on|off|tts|status]", subcommands=("on", "off", "tts", "status")),
 
+    # Voodoo
+    CommandDef("shipit", "Final monetization, optimization, and deployment by Claudio & Supreme", "Voodoo",
+               cli_only=True),
+
     # Tools & Skills
     CommandDef("tools", "Manage tools: /tools [list|disable|enable] [name...]", "Tools & Skills",
                args_hint="[list|disable|enable] [name...]", cli_only=True),

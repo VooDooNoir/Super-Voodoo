@@ -427,7 +427,7 @@ class TestSkillViewSecureSetupOnLoad:
 
         monkeypatch.setattr(
             skills_tool_module,
-            "_secret_capture_callback",
+            "_secret_captu[REDACTED_RESEND_KEY]",
             fake_secret_callback,
             raising=False,
         )
@@ -463,7 +463,7 @@ class TestSkillViewSecureSetupOnLoad:
         assert result["required_environment_variables"][0]["name"] == "TENOR_API_KEY"
         assert result["setup_skipped"] is False
 
-    def test_allows_skipping_secure_setup_and_still_loads(self, tmp_path, monkeypatch):
+    def test_allows_skipping_secu[REDACTED_RESEND_KEY]_and_still_loads(self, tmp_path, monkeypatch):
         monkeypatch.delenv("TENOR_API_KEY", raising=False)
 
         def fake_secret_callback(var_name, prompt, metadata=None):
@@ -476,7 +476,7 @@ class TestSkillViewSecureSetupOnLoad:
 
         monkeypatch.setattr(
             skills_tool_module,
-            "_secret_capture_callback",
+            "_secret_captu[REDACTED_RESEND_KEY]",
             fake_secret_callback,
             raising=False,
         )
@@ -517,7 +517,7 @@ class TestSkillViewSecureSetupOnLoad:
 
         monkeypatch.setattr(
             skills_tool_module,
-            "_secret_capture_callback",
+            "_secret_captu[REDACTED_RESEND_KEY]",
             fake_secret_callback,
             raising=False,
         )
@@ -799,7 +799,7 @@ class TestSkillViewPrerequisites:
             }
         ]
 
-    def test_no_setup_needed_when_legacy_prereqs_are_met(self, tmp_path, monkeypatch):
+    def test_no_setup_needed_when_legacy_prereqs_a[REDACTED_RESEND_KEY](self, tmp_path, monkeypatch):
         monkeypatch.setenv("PRESENT_KEY", "value")
         with patch("tools.skills_tool.SKILLS_DIR", tmp_path):
             _make_skill(
@@ -923,7 +923,7 @@ class TestSkillViewPrerequisites:
 
         monkeypatch.setattr(
             skills_tool_module,
-            "_secret_capture_callback",
+            "_secret_captu[REDACTED_RESEND_KEY]",
             fake_secret_callback,
             raising=False,
         )
@@ -1002,7 +1002,7 @@ Do the legacy thing.
             {"name": "LEGACY_KEY", "prompt": "Legacy key"}
         ]
 
-    def test_successful_secret_capture_reloads_empty_env_placeholder(
+    def test_successful_secret_captu[REDACTED_RESEND_KEY]_empty_env_placeholder(
         self, tmp_path, monkeypatch
     ):
         monkeypatch.setenv("TERMINAL_ENV", "local")
@@ -1021,7 +1021,7 @@ Do the legacy thing.
 
         monkeypatch.setattr(
             skills_tool_module,
-            "_secret_capture_callback",
+            "_secret_captu[REDACTED_RESEND_KEY]",
             fake_secret_callback,
             raising=False,
         )

@@ -4,7 +4,7 @@ function RoutingPanel() {
   const [tiers, setTiers] = useState({});
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
-  const [tier, setTier] = useState('free');
+  const [tier, setTier] = useState('standard');
   const [loading, setLoading] = useState(false);
   const userId = 'demo-user-001';
 
@@ -15,9 +15,6 @@ function RoutingPanel() {
       .catch(() => {
         // Fallback mock data
         setTiers({
-          free: { label: 'Free', maxTokens: 4096, models: [
-            { id: 'nousresearch/hermes-3-llama-3.1-8b:free', priority: 1, status: 'healthy' },
-          ]},
           standard: { label: 'Standard', maxTokens: 8192, models: [
             { id: 'nousresearch/hermes-3-llama-3.1-70b', priority: 1, status: 'healthy' },
           ]},
@@ -75,7 +72,7 @@ function RoutingPanel() {
               onClick={() => setTier(tierKey)}
             >
               {tiers[tierKey]?.label} ({tierKey})
-              <span className={`tier-badge tier-${tierKey === 'free' ? '1' : tierKey === 'standard' ? '2' : '3'}`}>
+              <span className={`tier-badge tier-${tierKey === 'standard' ? '2' : '3'}`}>
                 {tiers[tierKey]?.maxTokens} tokens
               </span>
             </button>

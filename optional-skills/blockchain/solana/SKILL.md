@@ -103,7 +103,7 @@ in both SOL and USD.
 
 ```bash
 python3 ~/.hermes/skills/blockchain/solana/scripts/solana_client.py \
-  tx 5j7s8K...your_signature_here
+  tx 5j7s8K...your_signatu[REDACTED_RESEND_KEY]
 ```
 
 Output: slot, timestamp, fee, status, balance changes (SOL + USD),
