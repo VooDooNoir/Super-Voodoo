@@ -47,7 +47,7 @@ cli.cloud.modal_.run_cmd(cmd, run_folder, volumes=None)
       - log
         - Parameters
       - push_to_hub
-      - sto[REDACTED_RESEND_KEY]
+      - store
         - Parameters
 
 Module for customized trainers
@@ -85,7 +85,7 @@ core.trainers.base.AxolotlTrainer.push_to_hub(*args, **kwargs)
 
 Example 4 (python):
 ```python
-core.trainers.base.AxolotlTrainer.sto[REDACTED_RESEND_KEY](
+core.trainers.base.AxolotlTrainer.store(
     metrics,
     train_eval='train',
     reduction='mean',
@@ -463,9 +463,9 @@ Dataset loading utilities.
 
 Dataclass with fields for training and validation datasets and metadata.
 
-Loads one or more training or evaluation datasets, calling axolotl.utils.data.prepa[REDACTED_RESEND_KEY]. Optionally, logs out debug information.
+Loads one or more training or evaluation datasets, calling axolotl.utils.data.prepare. Optionally, logs out debug information.
 
-Loads one or more training or evaluation datasets for RL training using paired preference data, calling axolotl.utils.data.rl.prepa[REDACTED_RESEND_KEY]_datasets. Optionally, logs out debug information.
+Loads one or more training or evaluation datasets for RL training using paired preference data, calling axolotl.utils.data.rl.prepare_datasets. Optionally, logs out debug information.
 
 Randomly sample num_samples samples with replacement from dataset.
 
@@ -1901,7 +1901,7 @@ utils.schemas.training.LrGroup()
     - Parameters
     - Returns
     - Raises
-  - prepa[REDACTED_RESEND_KEY]_for_qat
+  - prepare_for_qat
     - Parameters
     - Raises
 
@@ -1933,7 +1933,7 @@ utils.quantization.get_quantization_config(
 
 Example 3 (python):
 ```python
-utils.quantization.prepa[REDACTED_RESEND_KEY]_for_qat(
+utils.quantization.prepare_for_qat(
     model,
     weight_dtype,
     group_size=None,
@@ -1966,7 +1966,7 @@ utils.quantization.quantize_model(
   - AxolotlOrWarnErrorFilter
   - ColorfulFormatter
 - Functions
-  - configu[REDACTED_RESEND_KEY]
+  - configure
 
 Common logging module for axolotl.
 
@@ -1997,7 +1997,7 @@ logging_config.ColorfulFormatter()
 
 Example 4 (python):
 ```python
-logging_config.configu[REDACTED_RESEND_KEY]()
+logging_config.configure()
 ```
 
 ---
@@ -2352,8 +2352,8 @@ prompt_strategies.alpaca_w_system.SystemDataPrompter(
     - Attributes
     - Methods
       - apply_post_model_load_patches
-      - apply_post_plugin_p[REDACTED_RESEND_KEY]_load_patches
-      - apply_p[REDACTED_RESEND_KEY]_load_patches
+      - apply_post_plugin_pre_load_patches
+      - apply_pre_load_patches
 
 loaders.patch_manager
 
@@ -2365,7 +2365,7 @@ Manages the application of patches during the model loading process.
 
 Apply patches that require the model instance.
 
-Apply post plugin-p[REDACTED_RESEND_KEY]_load load patches based on config.
+Apply post plugin-pre_load load patches based on config.
 
 Apply pre-model load patches based on config.
 
@@ -2383,12 +2383,12 @@ loaders.patch_manager.PatchManager.apply_post_model_load_patches(model)
 
 Example 3 (python):
 ```python
-loaders.patch_manager.PatchManager.apply_post_plugin_p[REDACTED_RESEND_KEY]_load_patches()
+loaders.patch_manager.PatchManager.apply_post_plugin_pre_load_patches()
 ```
 
 Example 4 (python):
 ```python
-loaders.patch_manager.PatchManager.apply_p[REDACTED_RESEND_KEY]_load_patches()
+loaders.patch_manager.PatchManager.apply_pre_load_patches()
 ```
 
 ---
@@ -2535,7 +2535,7 @@ A plugin is a reusable, modular, and self-contained piece of code that extends t
 
 To create a new plugin, you need to inherit from the BasePlugin class and implement the required methods.
 
-Plugin methods include: - register(cfg): Registers the plugin with the given configuration. - load_datasets(cfg): Loads and preprocesses the dataset for training. - p[REDACTED_RESEND_KEY]_load(cfg): Performs actions before the model is loaded. - post_model_build(cfg, model): Performs actions after the model is loaded, but before LoRA adapters are applied. - p[REDACTED_RESEND_KEY]_load(cfg, model): Performs actions before LoRA weights are loaded. - post_lora_load(cfg, model): Performs actions after LoRA weights are loaded. - post_model_load(cfg, model): Performs actions after the model is loaded, inclusive of any adapters. - post_trainer_create(cfg, trainer): Performs actions after the trainer is created. - create_optimizer(cfg, trainer): Creates and returns an optimizer for training. - create_lr_scheduler(cfg, trainer, optimizer, num_training_steps): Creates and returns a learning rate scheduler. - add_callbacks_p[REDACTED_RESEND_KEY](cfg, model): Adds callbacks to the trainer before training. - add_callbacks_post_trainer(cfg, trainer): Adds callbacks to the trainer after training.
+Plugin methods include: - register(cfg): Registers the plugin with the given configuration. - load_datasets(cfg): Loads and preprocesses the dataset for training. - pre_load(cfg): Performs actions before the model is loaded. - post_model_build(cfg, model): Performs actions after the model is loaded, but before LoRA adapters are applied. - pre_load(cfg, model): Performs actions before LoRA weights are loaded. - post_lora_load(cfg, model): Performs actions after LoRA weights are loaded. - post_model_load(cfg, model): Performs actions after the model is loaded, inclusive of any adapters. - post_trainer_create(cfg, trainer): Performs actions after the trainer is created. - create_optimizer(cfg, trainer): Creates and returns an optimizer for training. - create_lr_scheduler(cfg, trainer, optimizer, num_training_steps): Creates and returns a learning rate scheduler. - add_callbacks_pre(cfg, model): Adds callbacks to the trainer before training. - add_callbacks_post_trainer(cfg, trainer): Adds callbacks to the trainer after training.
 
 Adds callbacks to the trainer after creating the trainer. This is useful for callbacks that require access to the model or trainer.
 
@@ -2577,11 +2577,11 @@ Registers the plugin with the given configuration as an unparsed dict.
 
 The PluginManager class is responsible for loading and managing plugins. It should be a singleton so it can be accessed from anywhere in the codebase.
 
-Key methods include: - get_instance(): Static method to get the singleton instance of PluginManager. - register(plugin_name: str): Registers a new plugin by its name. - p[REDACTED_RESEND_KEY]_load(cfg): Calls the p[REDACTED_RESEND_KEY]_load method of all registered plugins.
+Key methods include: - get_instance(): Static method to get the singleton instance of PluginManager. - register(plugin_name: str): Registers a new plugin by its name. - pre_load(cfg): Calls the pre_load method of all registered plugins.
 
 Calls the add_callbacks_post_trainer method of all registered plugins.
 
-Calls the add_callbacks_p[REDACTED_RESEND_KEY] method of all registered plugins.
+Calls the add_callbacks_pre method of all registered plugins.
 
 Calls the create_lr_scheduler method of all registered plugins and returns the first non-None scheduler.
 
@@ -2623,9 +2623,9 @@ Calls the post_train_unload method of all registered plugins.
 
 Calls the post_trainer_create method of all registered plugins.
 
-Calls the p[REDACTED_RESEND_KEY]_load method of all registered plugins.
+Calls the pre_load method of all registered plugins.
 
-Calls the p[REDACTED_RESEND_KEY]_load method of all registered plugins.
+Calls the pre_load method of all registered plugins.
 
 Registers a new plugin by its name.
 
@@ -3183,7 +3183,7 @@ cli.config.load_cfg(config=Path('examples/'), **kwargs)
 
 Example 4 (python):
 ```python
-cli.config.prepa[REDACTED_RESEND_KEY](cfg)
+cli.config.prepare(cfg)
 ```
 
 ---
@@ -5328,7 +5328,7 @@ utils.schemas.integrations.MLFlowConfig()
 **Contents:**
 - utils.data.sft
 - Functions
-  - prepa[REDACTED_RESEND_KEY]
+  - prepare
     - Parameters
     - Returns
 
@@ -5340,7 +5340,7 @@ Prepare training and evaluation datasets based on configuration.
 
 Example 1 (python):
 ```python
-utils.data.sft.prepa[REDACTED_RESEND_KEY](cfg, tokenizer, processor=None)
+utils.data.sft.prepare(cfg, tokenizer, processor=None)
 ```
 
 ---
